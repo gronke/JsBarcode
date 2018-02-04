@@ -25,6 +25,7 @@ class SVGRenderer{
 
 			this.drawSvgBarcode(group, encodingOptions, encoding);
 			this.drawSVGText(group, encodingOptions, encoding);
+			this.drawSVGDelimiter(group, encodingOptions, encoding);
 
 			currentX += encoding.width;
 		}
@@ -121,6 +122,33 @@ class SVGRenderer{
 			textElem.appendChild(this.document.createTextNode(encoding.text));
 
 			parent.appendChild(textElem);
+		}
+	}
+
+
+	drawSVGDelimiter(parent, options, encoding){
+		var lineElem = this.document.createElementNS(svgns, 'line');
+		// Draw the text if displayValue is set
+		if(options.displayValueDelimiter){
+			var x, y;
+
+			lineElem.setAttribute("style",
+				"stroke:" + options.lineColor + "; stroke-width: " + options.displayValueDelimiterWidth
+			);
+
+			if(options.textPosition == "top"){
+				y = options.fontSize
+			}
+			else{
+				y = options.height + (options.textMargin / 2);
+			}
+
+			lineElem.setAttribute("y1", y);
+			lineElem.setAttribute("y2", y);
+			lineElem.setAttribute("x1", 0);
+			lineElem.setAttribute("x1", encoding.width);
+
+			parent.appendChild(lineElem);
 		}
 	}
 

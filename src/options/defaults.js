@@ -3,6 +3,8 @@ var defaults = {
 	height: 100,
 	format: "auto",
 	displayValue: true,
+	displayValueDelimiter: false,
+	displayValueDelimiterWidth: 2,
 	fontOptions: "",
 	font: "monospace",
 	text: undefined,
